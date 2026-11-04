@@ -10,9 +10,9 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _physics_process(delta: float) -> void:
-	const SPEED = 5.5
+	const SPEED = 8.0
 	const JUMP_VELOCITY = 10.0
-	const FALL_VELOCITY = 20.0
+	const FALL_VELOCITY = 30.0
 	
 	var input_direction_2D = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")	
 	var input_direction_3D = Vector3(input_direction_2D.x, 0, input_direction_2D.y)
@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	if hovering:
 		velocity.y = lerp(velocity.y, -2.5, 0.25)	
 	else:
-		velocity.y -= FALL_VELOCITY * delta
+		velocity.y -= lerp(0.0, FALL_VELOCITY, 0.75) * delta
 	
 	move_and_slide()
 	
